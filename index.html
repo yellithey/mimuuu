@@ -13,6 +13,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
+scroll-behavior:smooth;
 }
 
 body{
@@ -23,27 +24,30 @@ overflow-x:hidden;
 touch-action: manipulation;
 }
 
-/* HERO */
-
-.hero{
-height:100vh;
+/* GLOBAL FIX */
+section{
+min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
+padding:25px;
 text-align:center;
-padding:20px;
+width:100%;
 }
 
+/* HERO */
 .hero img{
-width:300px;
+width:280px;
 max-width:90%;
 border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
 margin-bottom:20px;
 }
 
 .hero h1{
 font-size:2rem;
+line-height:1.3;
 }
 
 .hero h2{
@@ -51,109 +55,104 @@ margin-top:10px;
 font-weight:300;
 }
 
-button{
-margin-top:30px;
-padding:12px 30px;
+.scroll-btn{
+margin-top:25px;
+padding:12px 28px;
 border:1px solid #8b1e2d;
 background:transparent;
 color:#8b1e2d;
+cursor:pointer;
 font-size:16px;
 }
 
 /* COUNTDOWN */
-
-.countdown{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-text-align:center;
+.title{
+font-size:2rem;
+margin-bottom:25px;
 }
 
-.boxes{
+.countdown{
 display:flex;
 gap:10px;
 flex-wrap:wrap;
 justify-content:center;
-margin-top:20px;
 }
 
 .box{
 background:white;
 padding:15px;
-border-radius:10px;
+border-radius:12px;
 min-width:70px;
 }
 
 .box span{
-font-size:2rem;
 display:block;
+font-size:2rem;
+font-weight:bold;
 }
 
 /* GALLERY */
-
 .gallery{
-min-height:100vh;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:10px;
-padding:20px;
+width:100%;
+max-width:100%;
 }
 
 .gallery img{
 width:100%;
-height:180px;
+height:160px;
 object-fit:cover;
-border-radius:10px;
+border-radius:12px;
 }
 
-/* SWIPE CARDS */
-
-.cards{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-position:relative;
-}
-
-.card{
-position:absolute;
-width:280px;
-height:380px;
+/* SONG */
+.song-card{
 background:white;
-border-radius:20px;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-font-size:18px;
-opacity:0;
-transform:scale(0.8);
-transition:0.4s;
+padding:25px;
+border-radius:18px;
+max-width:90%;
 }
 
-.card.active{
-opacity:1;
-transform:scale(1);
+.song-card a{
+display:inline-block;
+margin-top:15px;
+color:#8b1e2d;
+font-size:18px;
+}
+
+/* LETTER */
+.letter{
+background:white;
+padding:20px;
+border-radius:15px;
+max-width:95%;
+text-align:left;
+line-height:2;
+font-size:16px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 /* ENVELOPE */
-
 .envelope{
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-text-align:center;
 }
 
-.env-btn{
+.env{
 font-size:70px;
 cursor:pointer;
+animation:float 2s infinite ease-in-out;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+100%{transform:translateY(0)}
 }
 
 .letterBox{
@@ -163,41 +162,43 @@ background:rgba(0,0,0,0.6);
 display:none;
 justify-content:center;
 align-items:center;
-padding:20px;
+padding:15px;
 }
 
-.letter{
+.letterPopup{
 background:white;
 padding:20px;
 border-radius:15px;
-max-width:500px;
-line-height:2;
-overflow-y:auto;
+max-width:95%;
 max-height:80vh;
+overflow:auto;
+line-height:2;
+font-size:15px;
 }
 
 /* END */
-
-.end{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-text-align:center;
-}
-
-.end h1{
+.footer{
 font-size:2rem;
 }
 
-/* MOBILE */
+.small{
+margin-top:10px;
+font-size:1rem;
+}
 
+/* MOBILE FIX EXTRA */
 @media(max-width:768px){
 
-.hero h1{font-size:1.5rem;}
+.hero h1{font-size:1.6rem;}
+.title{font-size:1.8rem;}
 
-.card{width:90%;}
+.gallery{
+grid-template-columns:1fr 1fr;
+}
+
+.box span{
+font-size:1.7rem;
+}
 
 }
 
@@ -208,53 +209,56 @@ font-size:2rem;
 
 <!-- HERO -->
 <section class="hero">
-<img src="images/pic1.jpg">
+<img src="images/IMG_4553.JPG">
 <h1>for the girl i'd choose in every universe.</h1>
 <h2>Mimu ♡</h2>
-<button onclick="next()">open</button>
+<button class="scroll-btn" onclick="next()">open ♡</button>
 </section>
 
 <!-- COUNTDOWN -->
-<section class="countdown">
-<h1>Countdown 🎂</h1>
+<section>
+<h1 class="title">Countdown 🎂</h1>
 
-<div class="boxes">
+<div class="countdown">
 <div class="box"><span id="d">0</span>Days</div>
 <div class="box"><span id="h">0</span>Hours</div>
-<div class="box"><span id="m">0</span>Min</div>
-<div class="box"><span id="s">0</span>Sec</div>
+<div class="box"><span id="m">0</span>Minutes</div>
+<div class="box"><span id="s">0</span>Seconds</div>
 </div>
 </section>
 
 <!-- GALLERY -->
-<section class="gallery">
-<img src="images/pic1.jpg">
-<img src="images/pic2.jpg">
-<img src="images/pic3.jpg">
-<img src="images/pic4.jpg">
+<section>
+<div class="gallery">
+<img src="images/IMG_4559.JPG">
+<img src="images/IMG_4553.JPG">
+<img src="images/IMG_4506.JPG">
+<img src="images/IMG_4539.JPG">
+<img src="images/IMG_4426.JPG">
+</div>
 </section>
 
-<!-- CARDS -->
-<section class="cards">
-<div class="card active">supermarket 🛒</div>
-<div class="card">instagram 📱</div>
-<div class="card">dahab 🌊</div>
-<div class="card">parking 🌙</div>
+<!-- SONG -->
+<section>
+<div class="song-card">
+<h1>our song ♫</h1>
+<a target="_blank" href="https://youtu.be/qzEc57UBmrA?si=SDuwpukeUa00Dhdk">
+play our song ♡
+</a>
+</div>
 </section>
 
 <!-- ENVELOPE -->
 <section class="envelope">
-<div class="env-btn" onclick="openLetter()">✉️</div>
+<div class="env" onclick="openLetter()">✉️</div>
 <p>open me</p>
 </section>
 
 <div class="letterBox" id="letterBox" onclick="closeLetter()">
-<div class="letter" onclick="event.stopPropagation()">
+<div class="letterPopup" onclick="event.stopPropagation()">
 
 happy birthday ya ahla haga hasaletly f hayaty 🤍
-
 <br><br>
-
 thank you for existing<br><br>
 BA7EBKKKKKK YA MIMU 🤍
 
@@ -262,19 +266,16 @@ BA7EBKKKKKK YA MIMU 🤍
 </div>
 
 <!-- END -->
-<section class="end">
-<h1>Thank you for existing.</h1>
-<p>— Fufuu ♡</p>
+<section>
+<h1 class="footer">Thank you for existing.</h1>
+<p class="small">— Fufuu ♡</p>
 </section>
 
 <script>
 
-/* COUNTDOWN */
-
-let birthday = new Date("June 21, 2026 00:00:00").getTime();
+const birthday = new Date("June 21, 2026 00:00:00").getTime();
 
 setInterval(()=>{
-
 let now = new Date().getTime();
 let d = birthday - now;
 
@@ -282,27 +283,7 @@ document.getElementById("d").innerText = Math.floor(d/(1000*60*60*24));
 document.getElementById("h").innerText = Math.floor((d%(1000*60*60*24))/(1000*60*60));
 document.getElementById("m").innerText = Math.floor((d%(1000*60*60))/(1000*60));
 document.getElementById("s").innerText = Math.floor((d%(1000*60))/1000);
-
 },1000);
-
-
-/* SWIPE CARDS */
-
-let index = 0;
-let cards = document.querySelectorAll(".card");
-
-document.addEventListener("click", ()=>{
-
-cards[index].classList.remove("active");
-
-index = (index + 1) % cards.length;
-
-cards[index].classList.add("active");
-
-});
-
-
-/* ENVELOPE */
 
 function openLetter(){
 document.getElementById("letterBox").style.display="flex";
@@ -311,8 +292,6 @@ document.getElementById("letterBox").style.display="flex";
 function closeLetter(){
 document.getElementById("letterBox").style.display="none";
 }
-
-/* NEXT */
 
 function next(){
 window.scrollBy({top: window.innerHeight, behavior:"smooth"});
